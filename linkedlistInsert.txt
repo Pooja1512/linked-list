@@ -1,0 +1,115 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package linkedlist;
+
+/**
+ *
+ * @author ppurush
+ */
+ class Node2{
+public int data;
+public Node2 next;
+public Node2(int x)
+{
+   data = x;
+   next =null;
+}
+}
+public class sll1 {
+    Node2 first, last;
+    public sll1(){
+    first = null;
+    last = null;
+}
+    /*
+    Time Complexity:- O(1)
+    Space Complexity:- O(2)
+    Time complexity is O(1) for the variable.
+    Space complexity is O(2) for the two variables.
+    */
+    
+    public void insertFirst(int x)
+    {
+        Node2 ptr = new Node2(x);
+        if(first == null)
+        {
+         first = ptr;
+         last = ptr;
+        }
+    }
+    /*
+    Time Complexity :- O(1)
+    Space Complexity :- O(1) 
+    */
+    public void insertLast(int x)
+    {
+        Node2 ptr = new Node2(x);
+        last.next = ptr;
+        last = ptr;
+    }
+    /*
+    Time complexity :- O(n)traversing the entire array
+    Space complexity:- O(1) for the storing the variable ptr.
+    */
+    public void insertMiddle(int x,int k)
+    {
+        int count = 1;
+        Node2 n2 = new Node2(x); 
+        Node2 ptr =first;
+        while(ptr!= null)
+        {
+            if(count == (k-1))
+            {
+                n2.next =ptr.next;
+                ptr.next = n2; 
+                break;
+            }
+            count++;
+        }
+        
+    }
+    
+    /*
+    Time Complexity :- O(1) 
+    Space Complexity :- O(1)
+    */
+    public void insertAtFirst(int x)
+    {
+       
+        Node2 ptr = new Node2(x);
+        ptr.next = first;
+        first = ptr;
+       
+    }
+     /*
+    Time complexity :- O(n)traversing the entire array
+    Space complexity:- O(1) for the storing the variable ptr.
+    */
+    public void print()
+    {
+        Node2 ptr = first;
+        while(ptr != null)
+        {
+            System.out.print(ptr.data+"->");
+            ptr = ptr.next;
+        }
+        
+    }
+    
+    public static void main(String args[])
+    {
+        sll1 s1 = new sll1();
+        s1.insertFirst(2);
+        s1.insertLast(4);
+        s1.print();
+        System.out.println("Insert in middle");
+        s1.insertMiddle(6, 2);
+        s1.print();
+        System.out.println("Insert at first");
+        s1.insertAtFirst(1);
+        s1.print();
+    }
+}
