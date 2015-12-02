@@ -1,0 +1,147 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package linkedlist;
+
+/**
+ *
+ * @author ppurush
+ */
+class Node3 {
+    public int data;
+    public Node3 next;
+    public Node3(int x)
+    {
+        data = x;
+        next = null;
+    }
+}
+public class slld {
+    Node3 first, last;
+    public slld()
+    {
+        first = null;
+        last = null;
+    }
+  
+    public void InsertFirst(int x)
+    {
+        Node3 ptr = new Node3(x);
+        if(first == null)
+        {
+            first = ptr;
+            last = ptr;
+        }
+        
+    }
+    
+    public void Insert(int x)
+    {
+        Node3 ptr = new Node3(x);
+        last.next = ptr;
+        last = ptr;
+    }
+    
+    public void print()
+    {
+        Node3 ptr = first;
+        while(ptr!= null)
+        {
+            System.out.print(ptr.data);
+            ptr = ptr.next;
+        }
+    }
+    /*
+    Time Complexity :- O(1) because we have the pointer to the first element.
+    Space Complexity :- O(1) because of the first pointer.  
+    
+    */
+    
+    public void DeleteFirst()
+    {
+        first = first.next;
+    }
+    
+    /*
+    Time Complexity :- O(n) because we may have to scan the entire array.
+    Space Complexity :- O(1) for storing the temporary variable ptr.
+    
+    */
+    
+    public void DeleteMiddle(int number)
+    {
+        int num = 1;
+        Node3 ptr = first;
+        while (ptr != null )
+        {
+            if(num == (number-1))
+            {
+                ptr.next = ptr.next.next;
+                break;
+            }
+            
+        }
+    }
+    /*
+  Time Complexity:- O(n) This is to scan the entire list
+  Space Complexity:-  O(1) This is to store temporary variable p.
+*/
+    public void DeleteList()
+    {
+        Node3 p = first;
+        while( p != null )
+        {
+            Node3 x = p.next;
+            p.next = null;
+            p = x;
+        }
+         first = null;
+    }
+    /*
+    Time Complexity:- O(n) This is to scan the entire list.
+    Space Complexity:- O(1) This is for storing the vtemporary variable.
+    
+    */
+    public void DeleteLast()
+    {
+        //with last pointer
+        Node3 ptr = first;
+        while(ptr != null)
+        {
+            if(ptr.next.next == null)
+            {
+                ptr.next = null;
+                break;
+            }
+            ptr = ptr.next;
+        }
+       
+        
+    }
+    
+    public static void main(String args[])
+    {
+        slld d = new slld();
+        d.InsertFirst(1);
+        d.Insert(2);
+        d.Insert(3);
+        d.Insert(4);
+        d.print();
+        d.DeleteFirst();
+        System.out.println("Deleting first");
+        d.print();
+        System.out.println("Deleting first");
+        d.DeleteFirst();
+        System.out.println("Deleting middle element");
+        d.DeleteMiddle(2);
+        d.print();
+        System.out.println("Delete the last element");
+        d.DeleteLast();
+        d.print();
+        System.out.println("Deleting the entire list");
+        d.DeleteList();
+        d.print();
+}
+}
