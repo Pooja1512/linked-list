@@ -1,0 +1,166 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package linkedlist;
+
+/**
+ *
+ * @author ppurush
+ */
+class dNode{
+    public dNode next;
+    public dNode prev;
+    public int data;
+    public dNode(int x)
+    {
+        data = x;
+        prev = null;
+        next = null;
+    }
+}
+public class dll {
+    dNode first, last;
+    public dll()
+    {
+        first = null;
+        last = null;
+    }
+    
+    public void insertFirst(int x)
+    {
+        dNode ptr = new dNode(x);
+        if (first == null)
+        {
+            first = ptr;
+            last = ptr;
+        }
+    }
+    
+    public void insertLast(int x)
+    {
+        dNode ptr = new dNode(x);
+        last.next = ptr;
+        ptr.prev = last;
+        last = ptr;
+    }
+    
+    public void insertStart(int x)
+    {
+        dNode ptr = new dNode(x);
+        ptr.next = first;
+        first.prev = ptr;
+        first = ptr;
+        
+    }
+    
+    public void deleteFirst()
+    {
+        first = first.next;
+        first.prev.next = null;
+        first.prev = null;
+    }
+    
+    public void deleteLast()
+    {
+        last = last.prev;
+        last.next.prev = null;
+        last.next = null;
+        
+    }
+    
+    public void traverseForward()
+    {
+        System.out.println();
+        dNode ptr = first;
+        while(ptr != null)
+        {
+            System.out.print(ptr.data+"->");
+            ptr = ptr.next;
+        }
+        
+    }
+    
+    public void insertMiddle(int x, int k)
+    {
+      dNode ptr = new dNode(x);
+      int count = 1;
+      dNode p = first;
+      while(p != null)
+      {
+          if(count == k-1)
+          {
+              ptr.next = p.next;
+              p.next.prev = ptr;
+              p.next = ptr;
+              ptr.prev = p;
+              
+              
+          }
+          count++;
+          p = p.next;
+      }
+    }
+    
+    public void deleteMiddle(int k)
+    {
+      
+        int count = 1;
+        dNode p = first;
+        while(p != null)
+        {
+           if(count == k-1)
+            {
+               
+               p.next.prev = null;
+               p.next = p.next.next;
+               p.next.prev = p;
+               break;
+            }
+           
+              p = p.next;
+              count++;
+        }
+    }
+    
+    public void traverseEnd()
+    {
+       dNode ptr = last;
+       System.out.println();
+       while(ptr != null)
+       {
+           System.out.print(ptr.data+"->");
+           ptr = ptr.prev;
+       }    
+    }
+    
+    
+    
+    public static void main(String args[])
+    {
+        dll d = new dll();
+        d.insertFirst(2);
+        d.insertLast(4);
+        d.insertLast(10);
+        d.insertLast(20);
+        /*d.traverseForward();
+        d.traverseEnd();
+        d.insertStart(10);
+        d.traverseForward();
+        d.insertMiddle(20, 3);
+        d.traverseForward();
+        d.traverseEnd();
+        d.deleteFirst();
+        d.traverseForward();
+        d.traverseEnd();
+        d.deleteLast();
+        d.traverseForward();
+        d.traverseEnd();*/
+        d.deleteMiddle(3);
+        d.traverseForward();
+        d.traverseEnd();
+        
+    }
+    
+}
