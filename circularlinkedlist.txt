@@ -1,0 +1,132 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* CIRCULAR LINKED LIST */
+package linkedlist;
+
+/**
+ *
+ * @author ppurush
+ */
+class Node4{
+    public int data;
+    public Node4 next;
+    
+    public Node4(int x)
+    {
+        data = x;
+        next = null;
+    }
+}
+public class circularll {
+    Node4 first, last;
+    public void circularll()
+    {
+     first =null;
+     last =null;
+    
+            }
+    /*
+    Time complexity - O(1)
+    Space complexity - O(1)
+    
+    */
+    public void addFirst(int x)
+    {
+        Node4 ptr = new Node4(x);
+        if(first == null)
+        {
+            first = ptr;
+            last = ptr;
+        }
+        ptr.next = first;
+    }
+    /*
+    Time Complexity - O(1)
+    Space Complexity - O(1)
+    */
+    public void addNext(int x)
+    {
+        Node4 ptr = new Node4(x);
+        last.next = ptr;
+        last = ptr;
+        last.next = first;
+    }
+    /*
+    Time Complexity - O(1)
+    Space Complexity - O(1)
+    
+    */
+    public void addToStart(int x)
+    {
+        Node4 ptr = new Node4(x);
+        last.next = ptr;
+        ptr.next = first;
+        first = ptr;      
+    }
+    /*
+    Time Complexity - O(1)
+    Space Complexity - O(1)
+    */
+    public void deleteFirst()
+    {
+        last.next = first.next;
+        first = first.next;
+    }
+    
+    public void deleteLast()
+    {
+        Node4 ptr = first;
+        
+        while(ptr != null  )
+        {
+            
+            if(ptr.next == last)
+            {
+                System.out.println("Deleting the last element");
+                ptr.next = first;
+                last = ptr;
+                break;
+            }
+            ptr = ptr.next;
+        }
+        
+        
+    }
+    
+    public void traverse()
+    {
+        Node4 ptr = first;
+        System.out.print(ptr.data+"->");
+        ptr = ptr.next;
+        while( ptr!= null)
+        {
+            System.out.print(ptr.data+"->");
+            if (ptr==first)
+            {    break;
+            }
+            
+            ptr = ptr.next;
+            
+        }
+        
+    }
+    
+    public static void main(String args[])
+    {
+        circularll l = new circularll();
+        l.addFirst(2);
+        l.addNext(4);
+        l.addNext(6);
+        l.traverse();
+        l.addToStart(10);
+        System.out.println();
+        l.traverse();
+        l.deleteLast();
+        System.out.println();
+        l.traverse();
+    }
+}
